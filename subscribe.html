@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Subscribe - Brian's Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="subscribe.js"></script>
+</head>
+<body>
+
+<header class="fade-in">
+    <h1>📬 Subscribe for Email Updates</h1>
+    <nav>
+        <a href="index.html">← Back Home</a>
+        <a href="notifications.html">Notifications</a>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="post-text-box slide-in" style="max-width: 600px; margin: 0 auto;">
+        <div class="card" style="text-align: center;">
+            <h2>Stay Updated with Email & SMS</h2>
+            <p>Subscribe to receive notifications for new posts, likes, and blog updates.</p>
+            
+            <div style="margin: 30px 0;">
+                <!-- Toggle between Email and Phone -->
+                <div style="display: flex; gap: 10px; margin-bottom: 30px; justify-content: center;">
+                    <button id="emailTab" class="tab-button active">📧 Email</button>
+                    <button id="phoneTab" class="tab-button">📱 Phone (SMS)</button>
+                </div>
+                
+                <!-- Email Subscription Form -->
+                <div id="emailForm" class="subscription-form">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; text-align: left; margin-bottom: 8px; font-weight: 600;">
+                            Your Email Address:
+                        </label>
+                        <input type="email" id="emailInput" placeholder="your.email@example.com" class="form-input">
+                        <small style="display: block; text-align: left; margin-top: 5px; color: #666;">
+                            We'll send notifications to this email
+                        </small>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px; text-align: left;">
+                        <h3 style="margin-bottom: 10px;">Notification Preferences</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="emailNewPosts" checked>
+                            <span>New posts from the blog</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="emailLikes" checked>
+                            <span>When someone likes your post</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="emailComments" checked>
+                            <span>New comments on your posts</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="emailWeekly" checked>
+                            <span>Weekly digest email</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Phone Subscription Form -->
+                <div id="phoneForm" class="subscription-form" style="display: none;">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; text-align: left; margin-bottom: 8px; font-weight: 600;">
+                            Phone Number:
+                        </label>
+                        <input type="tel" id="phoneInput" placeholder="+1 (555) 123-4567" class="form-input">
+                        <small style="display: block; text-align: left; margin-top: 5px; color: #666;">
+                            We'll send SMS notifications to this number
+                        </small>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px; text-align: left;">
+                        <h3 style="margin-bottom: 10px;">SMS Preferences</h3>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="smsNewPosts" checked>
+                            <span>New important posts (limited)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="smsLikes">
+                            <span>When someone likes your post</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="smsUrgent" checked>
+                            <span>Urgent announcements</span>
+                        </label>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                            📱 Standard SMS rates may apply. Max 5 messages per week.
+                        </p>
+                    </div>
+                </div>
+                
+                <p id="errorMessage" style="color: #ff5c8a; margin: 15px 0; min-height: 20px;"></p>
+                <p id="successMessage" style="color: #4CAF50; margin: 15px 0; min-height: 20px;"></p>
+                
+                <button id="subscribeBtn" class="submit-post" style="width: 100%; font-size: 18px; padding: 15px;">
+                    Subscribe Now
+                </button>
+                
+                <div style="margin-top: 25px;">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeTerms" checked>
+                        <span>I agree to receive notifications and accept the <a href="#" style="color: #0066cc;">Terms of Service</a></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; padding: 20px; background: rgba(0,0,0,0.05); border-radius: 10px;">
+                <h3>📊 Current Subscribers</h3>
+                <div style="display: flex; justify-content: space-around; margin-top: 15px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #ff5c8a;" id="emailSubscribers">0</div>
+                        <div style="font-size: 14px; opacity: 0.8;">Email Subscribers</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 24px; font-weight: bold; color: #4CAF50;" id="phoneSubscribers">0</div>
+                        <div style="font-size: 14px; opacity: 0.8;">SMS Subscribers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="profile zoom-in">
+        <h2>🔔 Why Subscribe?</h2>
+        <ul style="text-align: left; margin-top: 15px;">
+            <li>Get instant notifications for new posts</li>
+            <li>Never miss when someone interacts with your content</li>
+            <li>Receive weekly blog digests</li>
+            <li>Option to unsubscribe anytime</li>
+        </ul>
+        
+        <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 10px;">
+            <h3>📋 Your Subscriptions</h3>
+            <div id="currentSubscriptions" style="margin-top: 15px;">
+                <p style="opacity: 0.7; text-align: center;">No active subscriptions</p>
+            </div>
+            <button id="manageSubBtn" style="width: 100%; margin-top: 15px; padding: 10px; background: #666; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                Manage Subscriptions
+            </button>
+        </div>
+    </aside>
+</main>
+
+</body>
+</html>

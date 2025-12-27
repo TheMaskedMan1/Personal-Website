@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email Notifications - Brian's Blog</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="notifications.js"></script>
+</head>
+<body>
+
+<header class="fade-in">
+    <h1>📧 Email Notifications</h1>
+    <nav>
+        <a href="index.html">← Back Home</a>
+        <a href="post.html">Create Post</a>
+        <a href="subscribe.html">Subscribe</a>
+        <button id="markAllRead" style="background: rgba(255, 255, 255, 0.9); border: none; padding: 10px 25px; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3); transition: all 0.3s ease; margin-left: 10px;">Mark All Read</button>
+        <button id="deleteAllBtn" style="background: #ff5c8a; color: white; border: none; padding: 10px 25px; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 92, 138, 0.3); transition: all 0.3s ease; margin-left: 10px;">Delete All</button>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="post-text-box slide-in">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2>Your Notifications</h2>
+            <div>
+                <span id="unreadCount" style="background: #ff5c8a; color: white; padding: 5px 15px; border-radius: 20px; font-weight: 600;"></span>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 30px; background: rgba(255,255,255,0.9); padding: 20px; border-radius: 15px;">
+            <h3>📬 Email Settings</h3>
+            <div style="display: flex; gap: 20px; margin-top: 15px;">
+                <label style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="emailNotifications" checked>
+                    <span>Receive email notifications for new posts</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="emailLikes" checked>
+                    <span>Receive email when someone likes your post</span>
+                </label>
+            </div>
+        </div>
+
+        <div id="notificationsContainer" style="display: flex; flex-direction: column; gap: 15px;">
+            <!-- Notifications will be loaded here -->
+            <p style="text-align: center; padding: 40px; opacity: 0.7;">No notifications yet. Create a post to get started!</p>
+        </div>
+    </section>
+
+    <aside class="profile zoom-in">
+        <h2>📧 Email Notifications</h2>
+        <p>This system allows email notifications:</p>
+        <ul style="text-align: left; margin-top: 15px;">
+            <li>New posts created by you or others</li>
+            <li>When someone likes your post</li>
+            <li>Blog updates and announcements</li>
+        </ul>
+        <p style="margin-top: 20px; font-size: 14px; opacity: 0.8;">Note: This is optional.</p>
+        
+        <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 10px;">
+            <h3> Enter here</h3>
+            <button id="simulateEmail" style="width: 100%; padding: 12px; background: #4CAF50; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">Send Text Notification</button>
+        </div>
+    </aside>
+</main>
+
+</body>
+</html>

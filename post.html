@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="post.js"></script>
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userSession = localStorage.getItem('userSession');
+            
+            if (!isLoggedIn || isLoggedIn !== 'true' || !userSession) {
+                // Redirect to login page if not logged in
+                window.location.href = 'login.html';
+            } else {
+                
+                try {
+                    const session = JSON.parse(userSession);
+                    const sessionTime = new Date(session.timestamp);
+                    const currentTime = new Date();
+                    const hoursDiff = (currentTime - sessionTime) / (1000 * 60 * 60);
+                    
+                    if (hoursDiff > 24) {
+                        // Session expired
+                        localStorage.removeItem('isLoggedIn');
+                        localStorage.removeItem('userSession');
+                        window.location.href = 'login.html';
+                    }
+                } catch (e) {
+                    // Invalid session
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('userSession');
+                    window.location.href = 'login.html';
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+
+<header class="fade-in">
+    <h1>Create a Post</h1>
+    <nav>
+        <a href="index.html">← Back Home</a>
+        <button id="logoutBtn" style="background: rgba(255, 255, 255, 0.9); border: none; padding: 10px 25px; border-radius: 12px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3); transition: all 0.3s ease; margin-left: 20px;">Logout</button>
+    </nav>
+</header>
+
+<main class="container">
+    <section class="post-text-box slide-in">
+        <div style="text-align: right; margin-bottom: 20px; font-size: 14px; opacity: 0.8;">
+            Logged in as: <span id="currentUser"></span>
+        </div>
+
+        <h2>📸 Upload Images</h2>
+        <input type="file" id="imageInput" accept="image/*" multiple>
+
+        <h2>📝 Description</h2>
+        <textarea id="description" placeholder="Write something..."></textarea>
+
+        <button class="submit-post" id="postBtn">Post</button>
+
+        <hr style="margin:40px 0;">
+
+        <h2>📰 Your Posts</h2>
+        <div id="postsContainer"></div>
+
+    </section>
+</main>
+
+<script>
+    // Set current username
+    document.addEventListener('DOMContentLoaded', function() {
+        const userSession = localStorage.getItem('userSession');
+        if (userSession) {
+            try {
+                const session = JSON.parse(userSession);
+                document.getElementById('currentUser').textContent = session.username;
+            } catch (e) {
+                document.getElementById('currentUser').textContent = 'User';
+            }
+        }
+        
+        // Logout button
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userSession');
+            window.location.href = 'login.html';
+        });
+    });
+</script>
+
+</body>
+</html>
+
